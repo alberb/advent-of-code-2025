@@ -35,7 +35,11 @@ def isPaperMoveable(x, y, grid):
         adjacentCount += 1
 
     isMoveable =  adjacentCount < 4
+    if isMoveable:
+        grid[y][x] = "x"
     return isMoveable
+
+
 
 def hasPaper(x, y, grid):
     if y < 0 or y >= len(grid):
@@ -44,8 +48,8 @@ def hasPaper(x, y, grid):
         return False
     return grid[y][x] == "@"
 
-def findAnswer(fileName):
-    grid = readFileAsGrid(fileName)
+
+def findAndMoveRolls(grid):
     moveableCount = 0
     for y in range(len(grid)):
         for x in range(len(grid[0])):
@@ -54,10 +58,22 @@ def findAnswer(fileName):
                 moveableCount += 1
     return moveableCount
 
+def findAnswer(fileName):
+    grid = readFileAsGrid(fileName)
+    totalMoveableCount = 0
+    canMoveMore = True
+    while canMoveMore:
+        moveableCount = findAndMoveRolls(grid)
+        print(f"Moveable count: {moveableCount}")
+        totalMoveableCount += moveableCount
+        canMoveMore = moveableCount > 0
+    return totalMoveableCount
+
 
 testAnswer = findAnswer("test.txt")
 print(f"Test answer: {testAnswer}")
-assert testAnswer == 13
+assert testAnswer == 43
+
 
 answer = findAnswer("input.txt")
 print(f"Answer: {answer}")
