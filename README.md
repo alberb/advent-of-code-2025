@@ -2,6 +2,10 @@
 
 Written in Python to gain familiarity
 
+## Authors
+
+- [alberb](https://github.com/alberb)
+
 ## Day 1
 
 **part1.py:** Tracks a location that moves left and right based on directional commands. It counts how many times the location crosses zero (wraps around using modulo 100). The code processes each line as a direction (L/R) and distance, moving one step at a time and checking if it hits zero.
