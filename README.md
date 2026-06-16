@@ -1,5 +1,7 @@
 # Advent of Code 2025 Solutions
 
+**Author:** jake-adams-wwt
+
 Written in Python to gain familiarity
 
 ## Day 1
