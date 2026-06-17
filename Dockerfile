@@ -1,26 +1,25 @@
 FROM nginx:alpine
 
-# Copy the index.html to nginx's default serving directory
+# Copy the index.html to the nginx html directory
 COPY index.html /usr/share/nginx/html/index.html
 
-# Create a custom nginx config that listens on port 3001
-RUN rm /etc/nginx/conf.d/default.conf
-
+# Create a custom nginx configuration
 RUN cat > /etc/nginx/conf.d/default.conf <<EOF
 server {
     listen 3001;
     server_name _;
 
+    root /usr/share/nginx/html;
+    index index.html;
+
     location / {
-        root /usr/share/nginx/html;
-        index index.html index.htm;
         try_files \$uri \$uri/ /index.html;
     }
+
+    error_page 404 /index.html;
 }
 EOF
 
-# Expose port 3001
 EXPOSE 3001
 
-# Start nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
