@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 AI Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-rank {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .tool-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .tool-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .tool-features {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .tool-features h4 {
+            color: #667eea;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .features-list {
+            list-style: none;
+            font-size: 0.85em;
+            color: #777;
+        }
+
+        .features-list li {
+            padding: 3px 0;
+        }
+
+        .features-list li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Top 10 AI Tools</h1>
+            <p>Discover the most powerful AI tools transforming technology today</p>
+        </header>
+
+        <div class="tools-grid" id="toolsContainer"></div>
+
+        <footer>
+            <p>&copy; 2025 AI Tools Directory. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const aiTools = [
+            {
+                rank: 1,
+                name: "ChatGPT",
+                description: "OpenAI's advanced conversational AI that can answer questions, write content, code, and assist with a wide variety of tasks through natural language interaction.",
+                features: ["Natural language processing", "Code generation", "Content creation", "Multi-language support"]
+            },
+            {
+                rank: 2,
+                name: "Claude",
+                description: "Anthropic's AI assistant known for its nuanced understanding, safety-focused design, and ability to handle complex reasoning tasks with detailed explanations.",
+                features: ["Advanced reasoning", "Long context windows", "Safety-focused", "Document analysis"]
+            },
+            {
+                rank: 3,
+                name: "Google Gemini",
+                description: "Google's multimodal AI model that can process text, images, audio, and video, providing comprehensive AI capabilities across different content types.",
+                features: ["Multimodal processing", "Real-time information", "Image understanding", "Integration with Google services"]
+            },
+            {
+                rank: 4,
+                name: "Midjourney",
+                description: "A cutting-edge AI image generation tool that creates stunning, high-quality artwork from text descriptions with exceptional artistic control.",
+                features: ["Text-to-image generation", "Artistic styles", "High resolution output", "Community features"]
+            },
+            {
+                rank: 5,
+                name: "DALL-E 3",
+                description: "OpenAI's image generation model that creates detailed, accurate images from text prompts with improved understanding of complex descriptions.",
+                features: ["Advanced image generation", "Natural language understanding", "High accuracy", "Editing capabilities"]
+            },
+            {
+                rank: 6,
+                name: "GitHub Copilot",
+                description: "An AI-powered code completion tool that suggests code snippets, functions, and entire programs to accelerate software development workflows.",
+                features: ["Code completion", "Multi-language support", "Real-time suggestions", "IDE integration"]
+            },
+            {
+                rank: 7,
+                name: "Perplexity AI",
+                description: "An AI search engine that provides accurate, cited answers to questions by searching the web in real-time with transparent source attribution.",
+                features: ["Web search integration", "Source citations", "Real-time information", "Conversational interface"]
+            },
+            {
+                rank: 8,
+                name: "Stable Diffusion",
+                description: "An open-source image generation model that enables users to create custom AI art locally with fine-tuning and community-driven improvements.",
+                features: ["Open-source", "Local deployment", "Fine-tuning support", "Community models"]
+            },
+            {
+                rank: 9,
+                name: "Jasper",
+                description: "An AI content creation platform designed for marketers and businesses to generate high-quality marketing copy, blog posts, and creative content at scale.",
+                features: ["Content generation", "Marketing templates", "Brand voice customization", "Team collaboration"]
+            },
+            {
+                rank: 10,
+                name: "Synthesia",
+                description: "An AI video generation platform that creates professional videos from text, enabling users to produce video content without cameras or actors.",
+                features: ["Text-to-video", "Avatar generation", "Multi-language support", "Professional templates"]
+            }
+        ];
+
+        // Render the tools
+        function renderTools() {
+            const container = document.getElementById('toolsContainer');
+            
+            aiTools.forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'tool-card';
+                
+                const featuresHTML = tool.features
+                    .map(feature => `<li>${feature}</li>`)
+                    .join('');
+                
+                card.innerHTML = `
+                    <div class="tool-rank">#${tool.rank}</div>
+                    <div class="tool-name">${tool.name}</div>
+                    <div class="tool-description">${tool.description}</div>
+                    <div class="tool-features">
+                        <h4>Key Features</h4>
+                        <ul class="features-list">
+                            ${featuresHTML}
+                        </ul>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', renderTools);
+    </script>
+</body>
+</html>
