@@ -1,0 +1,43 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Run tests
+      run: |
+        cd day1 && python part1.py && python part2.py && cd ..
+        cd day2 && python part1.py && python part2.py && cd ..
+        cd day3 && python part1.py && python part2.py && cd ..
+        cd day4 && python part1.py && python part2.py && cd ..
+        cd day5 && python part1.py && python part2.py && cd ..
+    
+    - name: Build Docker image
+      run: docker build -t advent-of-code-2025:${{ github.sha }} .
+    
+    - name: Deploy to AWS (if configured)
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        if [ -z "$AWS_ACCESS_KEY_ID" ]; then
+          echo "AWS credentials not configured. Skipping deployment."
+        else
+          echo "AWS credentials found. Ready for deployment."
+        fi
