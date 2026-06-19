@@ -2,6 +2,10 @@
 
 Written in Python to gain familiarity
 
+## Updates
+
+> **Update:** Brad made another edit to improve this project.
+
 ## Authors
 
 - [alberb](https://github.com/alberb)

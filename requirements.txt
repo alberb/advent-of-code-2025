@@ -1,0 +1,4 @@
+# Python dependencies for advent-of-code-2025
+
+# Required for english_to_french_translator.py
+requests
