@@ -1,0 +1,13 @@
+{
+  "name": "advent-of-code-2025-day2",
+  "version": "1.0.0",
+  "description": "Day 2 solutions for Advent of Code 2025",
+  "main": "part1.js",
+  "scripts": {
+    "part1": "node part1.js",
+    "part2": "node part2.js"
+  },
+  "keywords": ["advent-of-code"],
+  "author": "",
+  "license": "ISC"
+}
