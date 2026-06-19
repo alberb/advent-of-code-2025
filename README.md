@@ -35,3 +35,26 @@ Written in Python to gain familiarity
 **part1.py:** Identical to Day 4's part2.py - it performs the same paper/grid movement logic with the same test assertion (expecting answer of 43).
 
 **part2.py:** Identical to Day 4's part2.py - it performs the same paper/grid movement logic with the same test assertion (expecting answer of 43).
+
+---
+
+## Utilities
+
+### English-to-French Translator
+
+A standalone command-line utility located in the `translator/` directory that translates English text to French using the [`deep-translator`](https://pypi.org/project/deep-translator/) library (no API key required).
+
+**Install dependencies:**
+```bash
+pip install -r translator/requirements.txt
+```
+
+**Three usage modes:**
+
+| Mode | Command |
+|---|---|
+| Inline text | `python translator/translator.py "Hello, world!"` |
+| File input | `python translator/translator.py --file input.txt --output output.txt` |
+| Interactive REPL | `python translator/translator.py` |
+
+See [`translator/README.md`](translator/README.md) for full documentation, all CLI options, and example translations.
