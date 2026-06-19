@@ -1,0 +1,4 @@
+# Dependencies for the English-to-French translator
+# Install with: pip install -r translator/requirements.txt
+
+deep-translator==1.11.4
