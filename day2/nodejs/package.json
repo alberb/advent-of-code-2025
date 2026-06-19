@@ -1,0 +1,14 @@
+{
+  "name": "aoc-2025-day2",
+  "version": "1.0.0",
+  "description": "Advent of Code 2025 — Day 2 solutions in Node.js",
+  "scripts": {
+    "part1": "node part1.js",
+    "part2": "node part2.js",
+    "start": "npm run part1 && npm run part2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "license": "MIT"
+}
