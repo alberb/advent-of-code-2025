@@ -1,4 +1,8 @@
+import logging
 from deep_translator import GoogleTranslator
+
+# Configure module logger
+logger = logging.getLogger(__name__)
 
 
 def translate_text(text, source_lang='en', target_lang='fr'):
@@ -17,29 +21,53 @@ def translate_text(text, source_lang='en', target_lang='fr'):
         ValueError: If an unsupported language code is provided.
         Exception: Re-raises any unexpected translation errors.
     """
-    supported = GoogleTranslator().get_supported_languages(as_dict=True)
-    # supported is a dict of {language_name: code}
-    supported_codes = set(supported.values())
-
-    if source_lang != 'auto' and source_lang not in supported_codes:
-        raise ValueError(
-            f"Unsupported source language code: '{source_lang}'. "
-            f"Supported codes: {sorted(supported_codes)}"
-        )
-    if target_lang not in supported_codes:
-        raise ValueError(
-            f"Unsupported target language code: '{target_lang}'. "
-            f"Supported codes: {sorted(supported_codes)}"
-        )
-
+    logger.debug(f"translate_text() called with source_lang='{source_lang}', target_lang='{target_lang}', text_length={len(text)}")
+    
     try:
+        supported = GoogleTranslator().get_supported_languages(as_dict=True)
+        # supported is a dict of {language_name: code}
+        supported_codes = set(supported.values())
+        logger.debug(f"Retrieved {len(supported_codes)} supported language codes from GoogleTranslator")
+
+        if source_lang != 'auto' and source_lang not in supported_codes:
+            error_msg = f"Unsupported source language code: '{source_lang}'. Supported codes: {sorted(supported_codes)}"
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+        
+        logger.debug(f"Source language '{source_lang}' validated successfully")
+        
+        if target_lang not in supported_codes:
+            error_msg = f"Unsupported target language code: '{target_lang}'. Supported codes: {sorted(supported_codes)}"
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+        
+        logger.debug(f"Target language '{target_lang}' validated successfully")
+
+        logger.info(f"Translating text from '{source_lang}' to '{target_lang}' (text length: {len(text)} chars)")
         translator = GoogleTranslator(source=source_lang, target=target_lang)
-        return translator.translate(text)
+        result = translator.translate(text)
+        
+        logger.info(f"Translation successful: '{source_lang}' → '{target_lang}' (result length: {len(result)} chars)")
+        logger.debug(f"Translation result: {result!r}")
+        
+        return result
+    except ValueError as e:
+        logger.error(f"Validation error in translate_text(): {e}")
+        raise
     except Exception as e:
+        logger.error(f"Unexpected error during translation: {e}", exc_info=True)
         raise Exception(f"Translation failed: {e}") from e
 
 
 if __name__ == "__main__":
+    # Configure logging for example execution
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    logger.info("Starting translation examples")
+    
     examples = [
         ("Hello, how are you?", "en", "fr"),
         ("Good morning!", "en", "es"),
@@ -47,6 +75,12 @@ if __name__ == "__main__":
         ("Bonjour le monde", "fr", "en"),
     ]
 
-    for text, src, tgt in examples:
-        translated = translate_text(text, src, tgt)
-        print(f"[{src} → {tgt}] {text!r}  →  {translated!r}")
+    for i, (text, src, tgt) in enumerate(examples, 1):
+        try:
+            logger.info(f"Example {i}/{len(examples)}: Translating from {src} to {tgt}")
+            translated = translate_text(text, src, tgt)
+            print(f"[{src} → {tgt}] {text!r}  →  {translated!r}")
+        except Exception as e:
+            logger.error(f"Example {i} failed: {e}")
+    
+    logger.info("Translation examples completed")
