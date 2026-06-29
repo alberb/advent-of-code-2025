@@ -1,0 +1,24 @@
+{
+  "name": "translator",
+  "version": "1.0.0",
+  "description": "A simple text translation module using Google Translate API",
+  "main": "translator.js",
+  "scripts": {
+    "start": "node translator.js",
+    "test": "node translator.js"
+  },
+  "keywords": [
+    "translation",
+    "google-translate",
+    "multilingual"
+  ],
+  "author": "alberb",
+  "license": "MIT",
+  "dependencies": {
+    "google-translate-api-x": "^3.7.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
