@@ -1,13 +1,13 @@
 """
-String Reversal Utility
+String Reversal Utilities
 
-This module provides functions to reverse strings in various ways.
+This module provides multiple methods to reverse strings in Python.
 """
 
 
 def reverse_string(s):
     """
-    Reverse a string using slicing.
+    Reverse a string using Python slicing.
     
     Args:
         s (str): The string to reverse
@@ -24,7 +24,7 @@ def reverse_string(s):
 
 def reverse_string_loop(s):
     """
-    Reverse a string using a loop.
+    Reverse a string using a loop approach.
     
     Args:
         s (str): The string to reverse
@@ -33,13 +33,13 @@ def reverse_string_loop(s):
         str: The reversed string
         
     Example:
-        >>> reverse_string_loop("hello")
-        'olleh'
+        >>> reverse_string_loop("world")
+        'dlrow'
     """
-    reversed_str = ""
+    result = ""
     for char in s:
-        reversed_str = char + reversed_str
-    return reversed_str
+        result = char + result
+    return result
 
 
 def reverse_string_recursion(s):
@@ -53,8 +53,8 @@ def reverse_string_recursion(s):
         str: The reversed string
         
     Example:
-        >>> reverse_string_recursion("hello")
-        'olleh'
+        >>> reverse_string_recursion("python")
+        'nohtyp'
     """
     if len(s) == 0:
         return s
@@ -80,13 +80,12 @@ def reverse_words(s):
 
 if __name__ == "__main__":
     # Test cases
-    test_string = "Hello, World!"
+    test_string = "hello"
+    print(f"Original string: {test_string}")
+    print(f"Reversed (slicing): {reverse_string(test_string)}")
+    print(f"Reversed (loop): {reverse_string_loop(test_string)}")
+    print(f"Reversed (recursion): {reverse_string_recursion(test_string)}")
     
-    print("Original string:", test_string)
-    print("Reversed (slicing):", reverse_string(test_string))
-    print("Reversed (loop):", reverse_string_loop(test_string))
-    print("Reversed (recursion):", reverse_string_recursion(test_string))
-    
-    test_phrase = "The quick brown fox"
-    print("\nOriginal phrase:", test_phrase)
-    print("Words reversed:", reverse_words(test_phrase))
+    test_words = "hello world python"
+    print(f"\nOriginal words: {test_words}")
+    print(f"Reversed words: {reverse_words(test_words)}")
